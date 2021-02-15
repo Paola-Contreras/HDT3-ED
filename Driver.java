@@ -131,7 +131,14 @@ public class Driver{
         //System.out.print(printArray(mergeSort));
         
         
-
+        //Sorting using bubbleSort
+        Comparable[] b = sorts.BubbleSort(arr);
+        ArrayList<Integer> bubbleSort = new ArrayList<Integer>();
+        for(Comparable num2: b){
+            bubbleSort.add((Integer) num2);
+        }
+        //Show the array sorted
+        //System.out.print(printArray(bubbleSort));
         
     }
     
