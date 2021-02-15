@@ -64,6 +64,19 @@ public class Sorts{
     }
 } */
 
+public Comparable [] QuickSort (Comparable [] arr){
 
+    return arr;
+}
+
+public Comparable [] RadixSort (Comparable[] arr){
+
+    return arr;
+}
+
+public Comparable[] BubleSort(Comparable[]arr){
+
+    return arr;
+}
 
 }

@@ -9,7 +9,15 @@
 ********************************************************************************************************************/
 import java.util.*;
 import java.io.*;   
+
 public class Driver{
+
+
+    /**
+     * Random number generation 
+     * @return String of numbers 
+     */
+
     public static String generateNumbers(){
         String result="";
         Random rand = new Random();
@@ -20,6 +28,12 @@ public class Driver{
         result = result.substring(0,result.length()-1);
         return result;
     }
+
+
+    /**
+     * This method creates a new file and writes the random numbers generated previously 
+     * @throws Exception If issue occuer
+     */
 
     public static void GenerateFile(){
         File archivo= new File("Numbers.txt");
@@ -50,6 +64,8 @@ public class Driver{
              }
         }
     }
+
+    
     public static void main(String[] args){
         GenerateFile();
         
