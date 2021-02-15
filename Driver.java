@@ -98,24 +98,39 @@ public class Driver{
       return result;
     }
     public static void main(String[] args){
+        //Generate the file with the random numbers 
         GenerateFile();
         
+        //get the numbers and format them to an Integer array
         ArrayList<Integer> original = getNumbersArray();
         Sorts sorts = new Sorts();
-        //Ordenamiento con GnomeSort
-        ArrayList<Integer> gnomeSort =new ArrayList<Integer>(sorts.GnomeSort(original));
-        
-        
-        //Ordenamiento con mergeSort
-        int[] arr = new int[original.size()];
+        Integer[] arr = new Integer[original.size()];
         for(int i =0 ; i<original.size();i++){
-            arr[i] = original.get(i);
+            arr[i] = new Integer(original.get(i));
         }
-        ArrayList<Integer> mergeSort = new ArrayList<Integer>(sorts.sort(arr,0,arr.length-1));
-
         
-        //Muestra el array ya ordenado
-        System.out.print(printArray(mergeSort));
+        
+       //Sorting using gnomeSort
+        ArrayList<Integer> gnomeSort =new ArrayList<Integer>();
+        Comparable[] a = sorts.GnomeSort(arr);
+        for(Comparable num: a){
+            gnomeSort.add((Integer) num);
+        }
+        //Show the array sorted
+        //System.out.print(printArray(gnomeSort));
+        
+
+
+        //Sorting using mergeSort
+        Comparable[] numeros = sorts.sort(arr,0,arr.length-1);
+        ArrayList<Integer> mergeSort = new ArrayList<Integer>();
+        for(Comparable num2: numeros){
+            mergeSort.add((Integer) num2);
+        }
+        //Show the array sorted
+        //System.out.print(printArray(mergeSort));
+        
+        
 
         
     }

@@ -12,43 +12,40 @@ public class Sorts{
     public Sorts(){
 
     }
-    public ArrayList<Integer> GnomeSort(ArrayList<Integer> array){
-        int n = array.size();
-        int[] arr = new int[array.size()];
-        for(int i =0 ; i<array.size();i++){
-            arr[i] = array.get(i);
+    /**
+     *  Sort that shows the data using the gnomeSort
+     * @param arr array that contains the numbers 
+     * @return throw back the data in order
+     */
+    public Comparable[] GnomeSort(Comparable[] arr){
+        int n = arr.length-1;
+        for(int index = 1; index < n;){
+            if(index == 1){
+                index++;
+            }
+            if(arr[index].compareTo(arr[index - 1]) >= 0){
+                index++;
+            } else{
+                Comparable temp;
+                temp = arr[index];
+                arr[index] = arr[index-1];
+                arr[index -1] = temp;
+                index--;
+            }
         }
-        int index = 0; 
-  
-        while (index < n) { 
-            if (index == 0) 
-                index++; 
-            if (arr[index] >= arr[index - 1]) 
-                index++; 
-            else { 
-                int temp = 0; 
-                temp = arr[index]; 
-                arr[index] = arr[index - 1]; 
-                arr[index - 1] = temp; 
-                index--; 
-            } 
-        }
-        
-        for(int i =0 ; i <  array.size();i++){
-            array.set(i,arr[i]);
-        }
-        return array; 
+        return arr;
     }
 
-    void merge(int arr[], int l, int m, int r)
+    //Part of the mergeSort
+    void merge(Comparable arr[], int l, int m, int r)
     {
         // Find sizes of two subarrays to be merged
         int n1 = m - l + 1;
         int n2 = r - m;
  
         /* Create temp arrays */
-        int L[] = new int[n1];
-        int R[] = new int[n2];
+        Comparable L[] = new Comparable[n1];
+        Comparable R[] = new Comparable[n2];
  
         /*Copy data to temp arrays*/
         for (int i = 0; i < n1; ++i)
@@ -64,7 +61,7 @@ public class Sorts{
         // Initial index of merged subarry array
         int k = l;
         while (i < n1 && j < n2) {
-            if (L[i] <= R[j]) {
+            if (L[i].compareTo(R[j])<0) {
                 arr[k] = L[i];
                 i++;
             }
@@ -90,9 +87,14 @@ public class Sorts{
         }
     }
  
-    // Main function that sorts arr[l..r] using
-    // merge()
-    public ArrayList<Integer> sort(int arr[], int l, int r)
+    /**
+     *  Sort that shows the data using the mergesort
+     * @param arr array that contains the numbers 
+     * @param l represent the index of the left part of the array 
+     * @param r represent the index of the right part of the array
+     * @return throw back the data in order
+     */
+    public Comparable[] sort(Comparable arr[], int l, int r)
     {
         if (l < r) {
             // Find the middle point
@@ -105,11 +107,8 @@ public class Sorts{
             // Merge the sorted halves
             merge(arr, l, m, r);
         }
-        ArrayList<Integer> nums = new ArrayList<Integer>();
-        for(int a: arr){
-            nums.add(a);
-        }
-        return nums;
+       
+        return arr;
     }
 
     public Comparable [] QuickSort (Comparable [] arr){
