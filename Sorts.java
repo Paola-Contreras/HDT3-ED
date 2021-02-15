@@ -7,7 +7,9 @@
     Gabriela Paola Contreras Guerra  20213 
     Guetemala: 14/02/2021
 ********************************************************************************************************************/
+
 public class Sorts{
+
     public Comparable[] GnomeSort(Comparable[] arr){
         int index = 0; 
   
@@ -74,9 +76,24 @@ public Comparable [] RadixSort (Comparable[] arr){
     return arr;
 }
 
-public Comparable[] BubleSort(Comparable[]arr){
+/**
+ *  Sort that shows the data using the bubble sort
+ * @param arr array that contains the numbers 
+ * @return throw back the file data in order
+ */
+public Comparable[] BubbleSort(Comparable[]arr){
+    for (int i = 0; i < arr.length; i++){
+        for (int j =0; j< arr.length;j++){
+            if (arr[j].compareTo(arr[i])<0){
+                Comparable temp = arr[i];
+                arr[i]= arr[j];
+                arr[j] = temp;
+            }
+        }
 
-    return arr;
+    }
+
+    return arr; 
 }
 
 }
