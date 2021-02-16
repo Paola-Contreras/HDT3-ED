@@ -8,6 +8,7 @@
     Guetemala: 14/02/2021
 ********************************************************************************************************************/
 import java.util.ArrayList;
+import java.util.*; 
 public class Sorts{
     public Sorts(){
 
@@ -111,97 +112,71 @@ public class Sorts{
         return arr;
     }
 
-    /**
-     * Sort that shows the data using the Quick Sort 
-     * @param arr array that contains the numbres
-     * @param l represent the index of the left part of the array
-     * @param r represent the index of the right part of the array
-     * @return throw back the data in order
-     */
-    public Comparable [] QuickSort (Comparable [] arr,int l, int r){
-
-        Comparable div= arr[r];
-        Comparable temp= 0;
-        int i = l;
-        int j= r;
-        boolean attempt= true;
-        
-        if ( l >= r){
-            return arr;
+    
+    public int partition(Integer arr[], int low, int high) 
+    { 
+        Integer pivot = arr[high];  
+        int i = (low-1); // index of smaller element 
+        for (int j=low; j<high; j++) 
+        { 
+            // If current element is smaller than or 
+            // equal to pivot 
+            if (arr[j].compareTo(pivot)<0) 
+            { 
+                i++; 
+  
+                // swap arr[i] and arr[j] 
+                int temp = arr[i]; 
+                arr[i] = arr[j]; 
+                arr[j] = temp; 
+            } 
+        } 
+  
+        // swap arr[i+1] and arr[high] (or pivot) 
+        int temp = arr[i+1]; 
+        arr[i+1] = arr[high]; 
+        arr[high] = temp; 
+  
+        return i+1; 
+    } 
+  
+  
+    /* The main function that implements QuickSort() 
+      arr[] --> Array to be sorted, 
+      low  --> Starting index, 
+      high  --> Ending index */
+    public Comparable[] QuickSort(Comparable arr[], int low, int high) 
+    {
+        Integer[] nums = new Integer[arr.length];
+        int cont =0;
+        for(Comparable a : arr){
+            nums[cont++] = (Integer) a;
+        } 
+        if (low < high) 
+        { 
+            /* pi is partitioning index, arr[pi] is  
+              now at right place */
+            int pi = partition(nums, low, high); 
+  
+            // Recursively sort elements before 
+            // partition and after partition 
+            QuickSort(arr, low, pi-1); 
+            QuickSort(arr, pi+1, high); 
         }
-
-        while (attempt){
-            while(arr[i].compareTo(div)<0){
-                i++;
-            };
-            while((arr[j].compareTo(div)>0) && (j>l)){
-                j--;
-            };
-            
-            if (i<j){
-                temp= arr[i];
-                arr[i]=arr[j];
-                arr[j]= temp;
-            }else{
-                attempt= false;
-            }
-        }
-        return arr;
+        return arr; 
     }
+    
+    
+    
     /**
-     * Sort that shows the data using the Radix Sort 
+     *  Sort that shows the data using the bubble sort
      * @param arr array that contains the numbers 
-     * @return thorows back the data in order 
-     */
-    public Comparable [] RadixSort (Comparable[] arr){
-
-        Comparable sup=0;
-        Comparable temp;
-        ArrayList<Comparable> order_1= new ArrayList<Comparable>();
-        int length_arr= String.valueOf((int) sup).length();
-        int j,i,k;
-
-        for ( i =0; i<arr.length;i++){
-            if(arr[i].compareTo(sup)==1){
-                sup= arr[i];
-            }
-        }
-        for (i =1; i<length_arr;i++){
-            ArrayList<Comparable>[] order= new ArrayList[10];
-
-            for (k=0; k<10 ;k++){
-                order [k]= new ArrayList<Comparable>();
-            }
-
-            for (k=0;k< arr.length; k++){
-                temp = convert(String.valueOf(arr[k]).split(""), i);
-				order[(int) temp].add(arr[k]);
-            }
-
-            for (k = 0; k< 10; k++){
-				for (j = 0; j< order[j].size(); k++){
-
-					order_1.add(order[j].get(k));
-				}
-			}
-
-            for (k=0; k< order_1.size();k++){
-                arr[k]= order_1.get(k);
-            }
-        }
-        return arr;
-    }
-
-    /**
-     * Sort that shows the data using the bubble sort
-     * 
-     * @param arr array that contains the numbers
      * @return throw back the file data in order
      */
     public Comparable[] BubbleSort(Comparable[]arr){
         for (int i = 0; i < arr.length; i++){
             for (int j =0; j< arr.length;j++){
-                if (arr[j].compareTo(arr[i])<0){
+                if (arr[j].compareTo(arr[i])>0){
                     Comparable temp = arr[i];
                     arr[i]= arr[j];
                     arr[j] = temp;
@@ -213,20 +188,66 @@ public class Sorts{
         return arr; 
     }
 
-    /**
-     * 
-     * @param arr list that contains the numbers 
-     * @param place position wanted 
-     * @return retrun the digit in a specific position
-     */
-    private Comparable convert(String[] arr, int place){
 
-		if (place > arr.length){
-			return 0;
+    public int getMax(Integer arr[], int n) 
+    { 
+        int mx = arr[0]; 
+        for (int i = 1; i < n; i++) 
+            if (arr[i].compareTo(mx)>0) 
+                mx = arr[i]; 
+        return mx; 
+    } 
+  
+    // A function to do counting sort of arr[] according to 
+    // the digit represented by exp. 
+    public void countSort(Integer arr[], int n, int exp) 
+    { 
+        Integer output[] = new Integer[n]; // output array 
+        Integer i; 
+        Integer count[] = new Integer[10]; 
+        Arrays.fill(count, 0); 
+  
+        // Store count of occurrences in count[] 
+        for (i = 0; i < n; i++) 
+            count[(arr[i] / exp) % 10]++; 
+  
+        // Change count[i] so that count[i] now contains 
+        // actual position of this digit in output[] 
+        for (i = 1; i < 10; i++) 
+            count[i] += count[i - 1]; 
+  
+        // Build the output array 
+        for (i = n - 1; i >= 0; i--) { 
+            output[count[(arr[i] / exp) % 10] - 1] = arr[i]; 
+            count[(arr[i] / exp) % 10]--; 
+        } 
+  
+        // Copy the output array to arr[], so that arr[] now 
+        // contains sorted numbers according to curent digit 
+        for (i = 0; i < n; i++) 
+            arr[i] = output[i]; 
+    } 
+  
+    // The main function to that sorts arr[] of size n using 
+    // Radix Sort 
+    public Comparable[] radixsort(Comparable arr[], int n) 
+    { 
+        Integer[] nums = new Integer[n];
+        int cont =0;
+        for(Comparable a : arr){
+            nums[cont++] = (Integer) a;
+        }
+        // Find the maximum number to know number of digits 
+        int m = getMax(nums, n); 
+  
+        // Do counting sort for every digit. Note that 
+        // instead of passing digit number, exp is passed. 
+        // exp is 10^i where i is current digit number 
+        for (int exp = 1; m / exp > 0; exp *= 10) 
+            countSort(nums, n, exp); 
+        return arr;
+    }
 
-		} else{
-			return ((Comparable) Integer.parseInt(arr[arr.length - place]));
-		}
-	}
+
 
 }

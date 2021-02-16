@@ -139,25 +139,25 @@ public class Driver{
         }
         //Show the array sorted
         //System.out.print(printArray(bubbleSort));
-        
 
-        //Sorting using bubbleSort
-        Comparable[] c = sorts.QuickSort(arr,0,arr.length-1);
-        ArrayList<Integer> quickSort = new ArrayList<Integer>();
-        for(Comparable num3: c){
-            quickSort.add((Integer) num3);
+        //Sorting using radix Sort
+        Comparable[] c = sorts.radixsort(arr,arr.length);
+        ArrayList<Integer> RadixSort = new ArrayList<Integer>();
+        for(Comparable num2: c){
+            RadixSort.add((Integer) num2);
         }
         //Show the array sorted
-        System.out.print(printArray(quickSort));
+        //System.out.print(printArray(RadixSort));
 
-
-        Comparable[] r = sorts.RadixSort(arr);
-        ArrayList<Integer> radixSort = new ArrayList<Integer>();
-        for(Comparable num2: r){
-            radixSort.add((Integer) num2);
+        //Sorting using QuickSort
+        Comparable[] d = sorts.QuickSort(arr,0,arr.length-1);
+        ArrayList<Integer> quickSort = new ArrayList<Integer>();
+        for(Comparable num2: d){
+            quickSort.add((Integer) num2);
         }
-
-        //System.out.print(printArray(radixSort));
+        //Show the array sorted
+        //System.out.print(printArray(quickSort));
+        
     }
     
 }
