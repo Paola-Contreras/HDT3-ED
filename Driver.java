@@ -140,6 +140,24 @@ public class Driver{
         //Show the array sorted
         //System.out.print(printArray(bubbleSort));
         
+
+        //Sorting using bubbleSort
+        Comparable[] c = sorts.QuickSort(arr,0,arr.length-1);
+        ArrayList<Integer> quickSort = new ArrayList<Integer>();
+        for(Comparable num3: c){
+            quickSort.add((Integer) num3);
+        }
+        //Show the array sorted
+        System.out.print(printArray(quickSort));
+
+
+        Comparable[] r = sorts.RadixSort(arr);
+        ArrayList<Integer> radixSort = new ArrayList<Integer>();
+        for(Comparable num2: r){
+            radixSort.add((Integer) num2);
+        }
+
+        //System.out.print(printArray(radixSort));
     }
     
 }

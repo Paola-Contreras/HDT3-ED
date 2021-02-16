@@ -111,19 +111,91 @@ public class Sorts{
         return arr;
     }
 
-    public Comparable [] QuickSort (Comparable [] arr){
-
-        return arr;
-    }
-    
-    public Comparable [] RadixSort (Comparable[] arr){
-    
-        return arr;
-    }
-    
     /**
-     *  Sort that shows the data using the bubble sort
+     * Sort that shows the data using the Quick Sort 
+     * @param arr array that contains the numbres
+     * @param l represent the index of the left part of the array
+     * @param r represent the index of the right part of the array
+     * @return throw back the data in order
+     */
+    public Comparable [] QuickSort (Comparable [] arr,int l, int r){
+
+        Comparable div= arr[r];
+        Comparable temp= 0;
+        int i = l;
+        int j= r;
+        boolean attempt= true;
+        
+        if ( l >= r){
+            return arr;
+        }
+
+        while (attempt){
+            while(arr[i].compareTo(div)<0){
+                i++;
+            };
+            while((arr[j].compareTo(div)>0) && (j>l)){
+                j--;
+            };
+            
+            if (i<j){
+                temp= arr[i];
+                arr[i]=arr[j];
+                arr[j]= temp;
+            }else{
+                attempt= false;
+            }
+        }
+        return arr;
+    }
+    /**
+     * Sort that shows the data using the Radix Sort 
      * @param arr array that contains the numbers 
+     * @return thorows back the data in order 
+     */
+    public Comparable [] RadixSort (Comparable[] arr){
+
+        Comparable sup=0;
+        Comparable temp;
+        ArrayList<Comparable> order_1= new ArrayList<Comparable>();
+        int length_arr= String.valueOf((int) sup).length();
+        int j,i,k;
+
+        for ( i =0; i<arr.length;i++){
+            if(arr[i].compareTo(sup)==1){
+                sup= arr[i];
+            }
+        }
+        for (i =1; i<length_arr;i++){
+            ArrayList<Comparable>[] order= new ArrayList[10];
+
+            for (k=0; k<10 ;k++){
+                order [k]= new ArrayList<Comparable>();
+            }
+
+            for (k=0;k< arr.length; k++){
+                temp = convert(String.valueOf(arr[k]).split(""), i);
+				order[(int) temp].add(arr[k]);
+            }
+
+            for (k = 0; k< 10; k++){
+				for (j = 0; j< order[j].size(); k++){
+
+					order_1.add(order[j].get(k));
+				}
+			}
+
+            for (k=0; k< order_1.size();k++){
+                arr[k]= order_1.get(k);
+            }
+        }
+        return arr;
+    }
+
+    /**
+     * Sort that shows the data using the bubble sort
+     * 
+     * @param arr array that contains the numbers
      * @return throw back the file data in order
      */
     public Comparable[] BubbleSort(Comparable[]arr){
@@ -140,5 +212,21 @@ public class Sorts{
     
         return arr; 
     }
+
+    /**
+     * 
+     * @param arr list that contains the numbers 
+     * @param place position wanted 
+     * @return retrun the digit in a specific position
+     */
+    private Comparable convert(String[] arr, int place){
+
+		if (place > arr.length){
+			return 0;
+
+		} else{
+			return ((Comparable) Integer.parseInt(arr[arr.length - place]));
+		}
+	}
 
 }
